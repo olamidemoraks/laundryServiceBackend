@@ -8,7 +8,7 @@ const getUserReservation = async (req, res) => {
   // console.log(userId);
 
   const reservations = await Reservation.find({ userId })
-    .sort("createdAt")
+    .sort("-createdAt")
     .exec();
   console.log(userId);
   res.status(StatusCodes.OK).json(reservations);

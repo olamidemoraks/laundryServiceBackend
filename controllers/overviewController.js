@@ -18,18 +18,20 @@ const overview = async (req, res) => {
   });
 
   const today = new Date().getDate();
-  console.log(today);
   const pendingReservations = await Reservation.find({
     status: "pending",
   });
 
   const todayReservation = await Promise.all(
-    pendingReservations.map((reservation) => {
-      if (new Date(reservation.pickupDate).getDate() == today) {
+    pendingReservations.filter((reservation) => {
+      if (new Date(reservation.pickupDate).getDate() === today) {
         return reservation;
+      } else {
+        return;
       }
     })
   );
+  console.log(todayReservation);
 
   const overviewData = {
     totalUser: user,
